@@ -2,6 +2,20 @@
 
 URL="${1:-matrix.mozboz.com}"
 
+PORT="${1:-8448}"
+
+clear
+cat <<EOF
+
+You can pass your server domain name and port on the command line like this
+$0 matrix.org 8448
+
+
+EOF
+
+read -e -i "$URL" -p 'Please enter your Home Server URL: ' URL
+read -e -i "$PORT" -p 'Please enter your Home Server PORT: ' PORT
+
 #_service._proto.name. TTL class SRV priority weight port target.
 
 #_matrix._tcp.matrix.org. 600	IN	SRV	10 5 8448 matrix.org.
@@ -22,3 +36,12 @@ printf " =======================================================================
 printf "| %-39s | %6s | %8s | %6s | %5s  | %-26s |\n" "$r_srv" "$r_ttl" "$r_pri" "$r_weight" "$r_port" "$r_tgt"
 printf "| %-39s | %6s | %8s | %6s | %5s  | %-26s |\n" "$u_srv" "$u_ttl" "$u_pri" "$u_weight" "$u_port" "$u_tgt"
 printf " ============================================================================================================\n"
+
+
+if [[ ! $PORT == $u_port ]]; then
+    printf " ============================================================================================================\n"
+    printf "| ERROR: Your SRV record has a different port to the one you entered                                         |\n"
+    printf " ============================================================================================================\n"
+fi
+
+echo

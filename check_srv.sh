@@ -32,7 +32,7 @@ read -e -i "$PORT" -p 'Please enter your Home Server PORT: ' PORT
 
 read -t10 r_srv r_ttl r_j1 r_class r_pri r_weight r_port r_tgt < <(dig -t srv _matrix._tcp.matrix.org | grep '^_matrix';)
 
-read -t10 u_srv u_ttl u_j1 u_class u_pri u_weight u_port u_tgt < <(dig -t srv _matrix._tcp.$URL  | grep '^_matrix';)
+read -t10 u_srv u_ttl u_j1 u_class u_pri u_weight u_port u_tgt < <(dig -t srv _matrix._tcp."$URL"  | grep '^_matrix';)
 
 printf " ============================================================================================================\n"
 printf "| Service                                 |   TTL  | Priority | Weight |  Port  | Target                     |\n"

@@ -2,7 +2,7 @@
 
 URL="${1:-matrix.mozboz.com}"
 
-PORT="${1:-8448}"
+PORT="${2:-8448}"
 
 if [[ -z $COLUMNS ]]; then export COLUMNS=`tput cols`; fi
 
